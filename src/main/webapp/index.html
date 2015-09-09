@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>DoCoMo - Grade API Simulator</title>
+    <meta name="author" content="Tomas Boman">
+    <meta name="description" content="Simulation of Grade system's API for account session validation">
+</head>
+
+<body>
+<h1>Grade API Mock</h1>
+<p>HTTP POST to /ssoauth</p>
+<form method="post" action="/rest/ssoauth">
+    <select name="accountId">
+        <option value="valid0000000000000000000">Valid OTP</option>
+        <option value="unknown00000000000000000">Parameter Not Valid</option>
+        <option value="invalid00000000000000000">Invalid OTP</option>
+        <option value="gradeerror00000000000000">Grade Error</option>
+        <option value="remotedberror00000000000">Remote DB Error</option>
+        <option value="remotesvcerror0000000000">Remote Service Error</option>
+        <option value="svcunavailable0000000000">Service Unavailable</option>
+    </select>
+    <input type="submit" value="submit"/>
+</form>
+</body>
+</html>
