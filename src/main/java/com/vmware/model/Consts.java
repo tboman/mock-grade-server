@@ -23,4 +23,6 @@ public class Consts {
     public static final String REMOTE_DB_ERROR =   "remotedberror00000000000";
     public static final String REMOTE_SVC_ERROR =  "remotesvcerror0000000000";
     public static final String SVC_UNAVAILABLE =   "svcunavailable0000000000";
+    public static final String GRADE_HDR = "X-MMPF-AcctID";
+
 }

@@ -15,22 +15,20 @@
  */
 package com.vmware.controller;
 
+import com.vmware.model.Consts;
 import com.vmware.model.Result;
 import com.vmware.model.ValidationService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Component;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.FormParam;
+import javax.ws.rs.GET;
+import javax.ws.rs.HeaderParam;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
-import javax.ws.rs.client.ClientResponseContext;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
-
-import static javax.ws.rs.core.Response.Status.ACCEPTED;
 
 @Path("/")
 @Component
@@ -42,6 +40,13 @@ public class SsoAuth {
     @POST
     @Path("/ssoauth")
     public Response ssoauth(@FormParam("accountId") String accountId) {
+        Result result = validationService.validate(accountId);
+        return Response.status(result.getHttpStatus()).entity(result.toResultString()).build();
+    }
+
+    @GET()
+    @Path("/ssoauth")
+    public Response validateHeader(@HeaderParam(Consts.GRADE_HDR) String accountId) {
         Result result = validationService.validate(accountId);
         return Response.status(result.getHttpStatus()).entity(result.toResultString()).build();
     }

@@ -42,6 +42,12 @@ public class SsoAuthTest extends JerseyTest {
     }
 
     @Test
+    public void validOTPInHeader() {
+        final Response result = getWithHTTPHeaderInjected(Consts.VALID_ACCOUNTID);
+        verifyResult(result, "0000", "123", Response.Status.OK);
+    }
+
+    @Test
     public void validOTP() {
         final Response result = postFormData(Consts.VALID_ACCOUNTID);
         verifyResult(result, "0000", "123", Response.Status.OK);
@@ -50,6 +56,18 @@ public class SsoAuthTest extends JerseyTest {
     @Test
     public void invalidOTP() {
         final Response result = postFormData(Consts.INVALID_ACCOUNTID);
+        verifyResult(result, "0001", "", Response.Status.OK);
+    }
+
+    @Test
+    public void invalidOTPInHeader() {
+        final Response result = getWithHTTPHeaderInjected(Consts.INVALID_ACCOUNTID);
+        verifyResult(result, "0001", "", Response.Status.OK);
+    }
+
+    @Test
+    public void missingOTP() {
+        final Response result = postFormData("");
         verifyResult(result, "0001", "", Response.Status.OK);
     }
 
@@ -89,6 +107,10 @@ public class SsoAuthTest extends JerseyTest {
     private void verifyResult(Response result, String resultCode, String organizationId, Response.Status statusCode) {
         assertThat(result.readEntity(String.class)).isEqualTo("Result="+resultCode+"\nOrganizationGroupId="+organizationId);
         assertThat(Response.Status.fromStatusCode(result.getStatus())).isEqualTo(statusCode);
+    }
+
+    private Response getWithHTTPHeaderInjected(String accountId) {
+        return target(SERVER_ENDPOINT).request().header(Consts.GRADE_HDR, accountId).get();
     }
 
     private Response postFormData(String accountId) {

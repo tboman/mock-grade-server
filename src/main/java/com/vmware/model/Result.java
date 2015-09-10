@@ -43,7 +43,7 @@ public class Result {
     public String toResultString() {
         StringBuilder result = new StringBuilder();
         result.append("Result="+ getResultCode());
-        result.append("\n");
+        result.append("\r\n");
         result.append("OrganizationGroupId="+getOrganizationGroupId());
 
         return result.toString();
