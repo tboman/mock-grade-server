@@ -32,8 +32,8 @@ public class ValidationService {
 
     @PostConstruct
     public void init() {
-        results.put(Consts.VALID_ACCOUNTID, new Result(200, "0000", "123"));
-        results.put(Consts.INVALID_ACCOUNTID, new Result(200, "0001", ""));
+        results.put(Consts.VALID_ACCOUNTID, new Result(200, "0001", "123"));
+        results.put(Consts.INVALID_ACCOUNTID, new Result(200, "0000", ""));
         results.put(Consts.UNKNOWN_ACCOUNTID, new Result(400, "1040", ""));
         results.put(Consts.GRADE_ERROR, new Result(400, "2050", ""));
         results.put(Consts.REMOTE_DB_ERROR, new Result(500, "2396", ""));

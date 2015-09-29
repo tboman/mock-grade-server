@@ -44,31 +44,31 @@ public class SsoAuthTest extends JerseyTest {
     @Test
     public void validOTPInHeader() {
         final Response result = getWithHTTPHeaderInjected(Consts.VALID_ACCOUNTID);
-        verifyResult(result, "0000", "123", Response.Status.OK);
+        verifyResult(result, "0001", "123", Response.Status.OK);
     }
 
     @Test
     public void validOTP() {
         final Response result = postFormData(Consts.VALID_ACCOUNTID);
-        verifyResult(result, "0000", "123", Response.Status.OK);
+        verifyResult(result, "0001", "123", Response.Status.OK);
     }
 
     @Test
     public void invalidOTP() {
         final Response result = postFormData(Consts.INVALID_ACCOUNTID);
-        verifyResult(result, "0001", "", Response.Status.OK);
+        verifyResult(result, "0000", "", Response.Status.OK);
     }
 
     @Test
     public void invalidOTPInHeader() {
         final Response result = getWithHTTPHeaderInjected(Consts.INVALID_ACCOUNTID);
-        verifyResult(result, "0001", "", Response.Status.OK);
+        verifyResult(result, "0000", "", Response.Status.OK);
     }
 
     @Test
     public void missingOTP() {
         final Response result = postFormData("");
-        verifyResult(result, "0001", "", Response.Status.OK);
+        verifyResult(result, "0000", "", Response.Status.OK);
     }
 
     @Test
